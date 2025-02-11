@@ -1,0 +1,35 @@
+GameScreen
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 id="player-title">Player</h1>
+
+    <div class="game-container">
+        <div class="player-info">
+            <p>Health: <span id="player-health">100</span></p>
+            <p>Light: <span id="player-light">10</span></p>
+            <div id="player-moves"></div>
+        </div>
+
+        <div class="cpu-info">
+            <p>Health: <span id="cpu-health">100</span></p>
+            <p>Light: <span id="cpu-light">10</span></p>
+            <div id="cpu-move" class="cpu-move-box">CPU is choosing...</div>
+        </div>
+    </div>
+
+    <div id="log" class="log-container"></div>
+
+    <div id="animation-container">
+        <img id="battle-animation" src="" alt="Battle Animation">
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

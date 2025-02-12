@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #222;
+    color: white;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.player-info, .cpu-info {
+    background: #333;
+    padding: 15px;
+    border-radius: 8px;
+    width: 250px;
+}
+
+#player-moves button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#player-moves button:hover {
+    background: #666;
+}
+
+.cpu-move-box {
+    margin-top: 10px;
+    padding: 10px;
+    background: #444;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.log-container {
+    max-width: 500px;
+    margin: auto;
+    background: #333;
+    padding: 10px;
+    height: 150px;
+    overflow-y: auto;
+    border-radius: 5px;
+    text-align: left;
+}
+
+#animation-container {
+    margin-top: 20px;
+}
+
+#battle-animation {
+    width: 300px;
+    height: auto;
+    display: none;
+    margin: auto;
+}

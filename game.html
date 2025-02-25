@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div>
+        <audio controls loop>
+            <source src="Artistry_1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
 
     <div class="game-container">
         <div class="player-info">
@@ -17,6 +23,10 @@
             <button id="skip-turn" onclick="skipTurn()">Skip Turn</button>
         </div>
     
+        <div id="animation-container">
+            <img id="battle-animation" src="" alt="Battle Animation" style="display:none;">
+        </div>
+
         <div class="cpu-info">
             <h1>Enemy</h1>
             <p>Health: <span id="cpu-health">100</span></p>
@@ -27,9 +37,7 @@
     
     <div id="log" class="log-container"></div>
     
-    <div id="animation-container">
-        <img id="battle-animation" src="" alt="Battle Animation" style="display:none;">
-    </div>
+    
     
     <script src="gameLogic.js"></script>
 </body>

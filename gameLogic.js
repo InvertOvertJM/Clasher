@@ -5,11 +5,11 @@ let cpuChosenMove = null; // the move the cpu will choose
 
 // define available moves (with animations for both player and cpu)
 const moves = [
-    { name: "Power Strike", cost: 6, minRoll: 1, maxRoll: 6, damage: 20, type: "attack", playerAnimation: "power-strike-animation.gif", cpuAnimation: "cpu-power-strike-animation.gif" },
+    { name: "Power Strike", cost: 6, minRoll: 5, maxRoll: 6, damage: 20, type: "attack", playerAnimation: "power-strike-animation.gif", cpuAnimation: "dead.gif" },
     { name: "Quick Slash", cost: 3, minRoll: 2, maxRoll: 8, damage: 10, type: "attack", playerAnimation: "quick-slash-animation.gif", cpuAnimation: "cpu-quick-slash-animation.gif" },
-    { name: "Defensive Stance", cost: 4, minRoll: 3, maxRoll: 8, damage: 0, type: "passive", playerAnimation: "defensive-stance-animation.gif", cpuAnimation: "cpu-defensive-stance-animation.gif" },
-    { name: "Heal", cost: 8, minRoll: 4, maxRoll: 6, damage: -20, type: "healing", playerAnimation: "heal-animation.gif", cpuAnimation: "cpu-heal-animation.gif" },
-    { name: "Blitz", cost: 15, minRoll: 1, maxRoll: 12, damage: 40, type: "attack", playerAnimation: "blitz-animation.gif", cpuAnimation: "cpu-blitz-animation.gif" }
+    { name: "Defensive Stance", cost: 4, minRoll: 3, maxRoll: 8, damage: 0, type: "passive", playerAnimation: "defensive-stance-animation.gif", cpuAnimation: "dead.gif" },
+    { name: "Heal", cost: 8, minRoll: 4, maxRoll: 6, damage: -20, type: "healing", playerAnimation: "heal-animation.gif", cpuAnimation: "dead.gif" },
+    { name: "Blitz", cost: 15, minRoll: 1, maxRoll: 10, damage: 40, type: "attack", playerAnimation: "blitz-animation.gif", cpuAnimation: "dead.gif" }
 ];
 
 const playerMovesContainer = document.getElementById("player-moves"); // container to display the player's moves

@@ -59,11 +59,15 @@ h1 {
 }
 
 #animation-container {
-    margin-top: 20px;
+    margin-top: 10px;
+    flex: 1;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #battle-animation {
-    width: 300px;
+    width: 600px;
     height: auto;
     display: none;
     margin: auto;

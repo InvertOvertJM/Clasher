@@ -72,3 +72,27 @@ h1 {
     display: none;
     margin: auto;
 }
+
+.game-synopsis {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+
+/* Flashing red animation */
+@keyframes flashRed {
+    0% {
+        background-color: #444;
+    }
+    50% {
+        background-color: red;
+    }
+    100% {
+        background-color: #444;
+    }
+}
+
+.flash {
+    animation: flashRed 1s ease-out 3; /* Flashing effect for 1 second, 3 times */
+}

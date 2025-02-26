@@ -5,12 +5,12 @@ let cpuChosenMove = null; // the move the cpu will choose
 
 // define available moves (with animations for both player and cpu)
 const moves = [
-    { name: "Power Strike", cost: 5, minRoll: 3, maxRoll: 6, damage: 20, type: "attack", playerAnimation: "power-strike-animation.gif", cpuAnimation: "dead.gif" },
+    { name: "Power Strike", cost: 5, minRoll: 3, maxRoll: 6, damage: 20, type: "attack", playerAnimation: "power-strike-animation.gif", cpuAnimation: "cpu-power-strike.gif" },
     { name: "Quick Slash", cost: 3, minRoll: 2, maxRoll: 8, damage: 10, type: "attack", playerAnimation: "quick-slash-animation.gif", cpuAnimation: "cpu-quick-slash-animation.gif" },
-    { name: "Defensive Stance", cost: 4, minRoll: 3, maxRoll: 8, damage: 0, type: "passive", playerAnimation: "defensive-stance-animation.gif", cpuAnimation: "dead.gif" },
-    { name: "Heal", cost: 8, minRoll: 4, maxRoll: 6, damage: -20, type: "healing", playerAnimation: "heal-animation.gif", cpuAnimation: "dead.gif" },
-    { name: "Blitz", cost: 15, minRoll: 1, maxRoll: 10, damage: 40, type: "attack", playerAnimation: "blitz-animation.gif", cpuAnimation: "dead.gif" },
-    { name: "Perfect Block", cost: 10, minRoll: 8, maxRoll: 10, damage: 40, type: "passive", playerAnimation: "blitz-animation.gif", cpuAnimation: "dead.gif" }
+    { name: "Defensive Stance", cost: 4, minRoll: 3, maxRoll: 8, damage: 0, type: "passive", playerAnimation: "defensive-stance-animation.gif", cpuAnimation: "cpu-dodge-animation.gif" },
+    { name: "Heal", cost: 8, minRoll: 4, maxRoll: 6, damage: -20, type: "healing", playerAnimation: "player-heal-animation.gif", cpuAnimation: "cpu-heal-animation.gif" },
+    { name: "Blitz", cost: 15, minRoll: 1, maxRoll: 10, damage: 40, type: "attack", playerAnimation: "blitz.gif", cpuAnimation: "cpu-blitz.gif" },
+    { name: "Perfect Dodge", cost: 10, minRoll: 7, maxRoll: 10, damage: 0, type: "passive", playerAnimation: "defensive-stance-animation.gif", cpuAnimation: "cpu-dodge-animation.gif" }
 ];
 
 const playerMovesContainer = document.getElementById("player-moves"); // container to display the player's moves
@@ -41,6 +41,14 @@ function cpuChooseMove() {
         cpuChooseMove();
         return;
     }
+
+    //flash animation
+    cpuMoveContainer.classList.add("flash");
+
+    // 1 second duration
+    setTimeout(() => {
+        cpuMoveContainer.classList.remove("flash");
+    }, 1000); // Removes the flash class after the animation is complete
 
     // randomly choose a move from the available options
     cpuChosenMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
@@ -108,6 +116,7 @@ function skipTurn() {
     // cpu attacks as if it won the roll
     log(`CPU attacks with ${cpuChosenMove.name}!`);
     handleMoveEffect(cpuChosenMove, cpu, player); // apply the cpu's attack
+    setBattleAnimation(cpuChosenMove.cpuAnimation);
 
     updateUI(); // update the ui after the skip
     checkGameOver(); // check if the game is over
@@ -145,18 +154,46 @@ function updateUI() {
     document.getElementById("cpu-health").textContent = cpu.health;
     document.getElementById("player-light").textContent = player.light;
     document.getElementById("cpu-light").textContent = cpu.light;
+
+    updateMusicBasedOnHealth(); // update the music based on health
 }
 
+//update music based on player's health
+function updateMusicBasedOnHealth() {
+    const musicElement = document.getElementById("game-music");
+
+    if (player.health >= 80) {
+        const track1 = document.getElementById("track-1");
+        if (musicElement.src !== track1.src) { // only change if track is different
+            musicElement.src = track1.src;
+            musicElement.play(); // no reset
+        }
+    } else if (player.health >= 40) {
+        const track2 = document.getElementById("track-2");
+        if (musicElement.src !== track2.src) { 
+            musicElement.src = track2.src;
+            musicElement.play();
+        }
+    } else {
+        const track3 = document.getElementById("track-3");
+        if (musicElement.src !== track3.src) { 
+            musicElement.src = track3.src;
+            musicElement.play(); 
+        }
+    }
+
+    musicElement.loop = true; //music looping
+}
 // check if either the player or the cpu has lost all health
 function checkGameOver() {
     if (player.health <= 0) {
-        gameLocked = true; // lock the game if the player loses
+        gameLocked = true; // lock the game
         alert("CPU Wins! Game Over!"); // alert the player they lost
         showResetOption(); // show the option to restart the game
     } else if (cpu.health <= 0) {
-        gameLocked = true; // lock the game if the cpu loses
-        alert("Player Wins! Game Over!"); // alert the player they won
-        showResetOption(); // show the option to restart the game
+        gameLocked = true; // 
+        alert("Player Wins! Game Over!"); //  won
+        showResetOption(); 
     }
 }
 
@@ -187,6 +224,7 @@ function log(message) {
     entry.textContent = message;
     logContainer.appendChild(entry); // add the log entry to the container
     logContainer.scrollTop = logContainer.scrollHeight; // scroll the log down to the latest entry
+
 }
 
 // start the game
@@ -195,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("player-title").textContent = playerName; // display the player’s name
 });
 
-// initialize the ui and begin the game
-updateUI();
+
+// Initialize the game
 generateMoveButtons();
-cpuChooseMove();
+cpuChooseMove(); // let the cpu choose its first move
